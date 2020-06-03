@@ -1,0 +1,72 @@
+<!DOCTYPE html>{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Инфляция в России</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body>
+    {% block content %}
+      <div class="row">
+        <h1 class="col s12">Инфляция в России</h1>
+        <div class="col s12 m8">
+        
+        <!-- Ваша логика -->
+          <table border="2">
+          <b>
+            <th>Год</th>
+            <th>Январь</th>
+            <th>Февраль</th>
+            <th>Март</th>
+            <th>Апрель</th>
+            <th>Май</th>
+            <th>Июнь</th>
+            <th>Июль</th>
+            <th>Август</th>
+            <th>Сентябрь</th>
+            <th>Октябрь</th>
+            <th>Ноябрь</th>
+            <th>Декабрь</th>
+            <th bgcolor="#808080">Всего</th></b>
+
+          {% for year in years %}
+
+          <tr>
+            <td>{{ year|first }}</td>
+
+          {% for i in year|slice:'1:-1' %}
+            {% if i == 1000000 %}
+            <td>-</td>
+            {% elif i >= 5 %}
+            <td bgcolor="#ff0000">{{ i }}</td>
+            {% elif i >= 2 %}
+            <td bgcolor="#f98c8c">{{ i }}</td>
+            {% elif i >= 1 %}
+            <td bgcolor="#fcd3d3">{{ i }}</td>
+            {% elif i < 0 %}
+            <td bgcolor="#008000">{{ i }}</td>
+            {% else %}
+            <td>{{ i }}</td>
+            {% endif %}
+          {% endfor %}
+
+            <td bgcolor="#808080">{{ year|last }}</td>
+          </tr>
+
+          {% endfor %}
+
+          </table>
+
+        </div>
+      </div>
+    {% endblock %}
+
+  </body>
+</html>
